@@ -73,10 +73,10 @@ function setup() {
   createCanvas(winWidth, winHeigth);
   firstDice = new Dice(100, 100);
   secondDice = new Dice(100, -100);
-  ply1 = 0;
-  ply2 = 0;
+  ply1 = ceil(random(6));
+  ply2 = ceil(random(6));
   pointStop = 6;
-  button = createButton("Lancer");
+  button = createButton('Lancer');
   button.mousePressed(play);
 }
 
@@ -90,15 +90,18 @@ function draw() {
   text('Value 1: '+ply1, 20, 40);
   text('Value 2: '+ply2, 20, 60);
   if(action === 0) {
-    if((ply1 === pointStop) && (ply2 === pointStop)){
-      text('Finish', winWidth/2, 20);
-      firstDice.render(pointStop);
-      secondDice.render(pointStop);
-    }else{
+    if((ply1 === pointStop) && (ply2 === pointStop)){}
+    else{
       ply1 = firstDice.roll();
       ply2 = secondDice.roll();
       init = init + 1;
     }
     action = action + 1;
+  }else{
+    if((ply1 === pointStop) && (ply2 === pointStop)){
+      text('Finish', winWidth/2, 20);
+    }
+    firstDice.render(ply1);
+    secondDice.render(ply2);
   }
 }
